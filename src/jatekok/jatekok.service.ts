@@ -27,7 +27,7 @@ export class JatekokService {
       });
     }
     catch{
-      return undefined;
+      return undefined
     }
   }
 

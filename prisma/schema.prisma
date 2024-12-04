@@ -39,9 +39,9 @@ model Children{
 }
 
 model GiftList {
-  toys Toys @relation(fields: [toyId], references: [id])
+  toys Toys @relation(fields: [toyId], references: [id], onDelete: Cascade)
   toyId Int
-  children Children @relation(fields: [childId], references: [id])
+  children Children @relation(fields: [childId], references: [id], onDelete: Cascade)
   childId Int
 
   @@id([toyId, childId])

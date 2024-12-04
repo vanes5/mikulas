@@ -19,9 +19,9 @@ export class JatekokController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    const toy =  await this.jatekokService.findOne(+id);
-    if (!toy) throw new NotFoundException('No toy with this id ' + id)
-      return toy;
+    const toy = await this.jatekokService.findOne(+id);
+    if(!toy) throw new NotFoundException('No toy with this id ' + id)
+      return toy
   }
 
   @Patch(':id')

@@ -6,5 +6,6 @@ import { PrismaService } from 'src/prisma.service';
 @Module({
   controllers: [JatekokController],
   providers: [JatekokService, PrismaService],
+  exports: [JatekokService]
 })
 export class JatekokModule {}

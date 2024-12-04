@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, Put, ParseIntPipe } from '@nestjs/common';
 import { GyerekekService } from './gyerekek.service';
 import { CreateGyerekekDto } from './dto/create-gyerekek.dto';
 import { UpdateGyerekekDto } from './dto/update-gyerekek.dto';
@@ -17,6 +17,11 @@ export class GyerekekController {
     return this.gyerekekService.findAll();
   }
 
+  @Get('/jatekok')
+  async getGiftList(){
+    return this.gyerekekService.getGiftList();  
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const child =  await this.gyerekekService.findOne(+id);
@@ -32,10 +37,14 @@ export class GyerekekController {
 
   
 
-  @Put(':id/jatekok/:jatekid')
-  async put(@Param('id') id: string, @Param('jatekid') jatekid: string,  @Body() updateGyerekekDto: UpdateGyerekekDto){
-    
+  @Put(':id/jatekok/:toyid')
+  async put(@Param('id') id: string, @Param('toyid') toyid: string){
+    return await this.gyerekekService.put(+id, +toyid)
+  }
 
+  @Delete(':id/jatekok/:toyid')
+  async removeToy(@Param('id') id: string, @Param('toyid') toyid: string){
+    return await this.gyerekekService.removeToy(+id, +toyid);
   }
 
   @Delete(':id')
@@ -43,4 +52,6 @@ export class GyerekekController {
     const child = await this.gyerekekService.remove(+id);
     if (!child) throw new NotFoundException('No child with this id ' + id);
   }
+
+  
 }
